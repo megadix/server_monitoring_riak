@@ -13,7 +13,7 @@ import java.text.SimpleDateFormat
  * Classes
  * ======================================================================== */
 
-class MonitoringData {
+class OLDMonitoringData {
     @RiakKey
     @RiakIndex(name = "timestamp")
     String timestamp;
@@ -47,7 +47,7 @@ def createMonitoringData(
     def i = 0
     
     memData.keySet().each { date ->
-        def monData = new MonitoringData()
+        def monData = new OLDMonitoringData()
         monData.timestamp = dateFormat.format(date)
         monData.value = [
             mem: (memData.get(date)),
@@ -71,13 +71,9 @@ def createMonitoringData(
 def riakPbcHost = "192.168.56.101"
 def riakPbcPort = 10017
 
-/* ========================================================================
- * Main execution
- * ======================================================================== */
-
-def dateFormat = new SimpleDateFormat("yyyyMMdd_HHmmss");
+def dateFormat = new SimpleDateFormat("yyyyMMdd_HHmmss")
 def startDate = dateFormat.parse("20140101_000000")
-def endDate =   dateFormat.parse("20140107_000000")
+def endDate =   dateFormat.parse("20140108_000000")
 def intervalMinutes = 1
 
 // servers to simulate
@@ -87,6 +83,10 @@ def serversConf = [
      "CALIGOLA": [memMean: 0.1, memSd: 0.2, cpuMean: 0.8, cpuSd: 0.2],
      "DEMOTAPE": [memMean: 0.8, memSd: 0.3, cpuMean: 0.7, cpuSd: 0.4]
 ]
+
+/* ========================================================================
+ * Main execution
+ * ======================================================================== */
 
 def client = null
 
@@ -104,7 +104,6 @@ try {
         println "Storing function: ${filename}"
         functionsBucket.store(filename, getClass().getResourceAsStream(filename).text).execute()
     }
-    
 
 } catch (Exception e) {
     e.printStackTrace()

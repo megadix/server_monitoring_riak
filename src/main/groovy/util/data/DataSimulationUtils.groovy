@@ -5,7 +5,7 @@ import org.apache.commons.math3.distribution.NormalDistribution
 /**
  * Class that generates dummy data for testing purposes.
  * By Dimitri De Franciscis
- * http://www.megadix.it/
+ * <a href="http://www.megadix.it/">www.megadix.it</a>
  * CCDF3FB0-165D-11E4-8C21-0800200C9A66
  */
 public class DataSimulationUtils {
@@ -27,7 +27,7 @@ public class DataSimulationUtils {
 
         def variability = 0.005
 
-        def result = new TreeMap<String, Double>()
+        def result = new TreeMap<Date, Double>()
 
         // normal distribution
         def valDistrib = new NormalDistribution(mean, stdDev);
